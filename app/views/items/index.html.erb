@@ -1,0 +1,31 @@
+<div style="color: green"><%= notice %></>
+
+<h1 class="title is-1">Items</h1>
+
+<div id="items">
+    <table class="table is-bordered is-hoverable is-striped">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Active?</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% @items.order(:item_type, :name).each do |item| %>
+            <tr>
+                <td><%= item.name %></td>
+                <td><%= item.description %></td>
+                <td><%= item.item_type.try(:capitalize) %></td>
+                <td><%= item.active %></td>
+                <td><%= link_to "Show", item %></td>
+				<td><%= link_to "Destroy", item_path(item), data: {
+									turbo_method: :delete,
+									turbo_confirm: "Are you sure?"
+								  } %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+<%= link_to "New item", new_item_path %>

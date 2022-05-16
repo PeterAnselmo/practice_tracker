@@ -1,0 +1,15 @@
+<% if notice.present? %>
+<div class="notification is-primary"><%= notice %></div>
+<% end %>
+<h1 class="title is-1">Practice Item</h1>
+
+<%= render @item %>
+
+<div class="block">
+  <%= link_to "Edit this item", edit_item_path(@item), class:['button','is-primary'] %> |
+  <%= link_to "Back to items", items_path, class:['button','is-primary'] %>
+
+</div>
+<div class="block">
+  <%= button_to "Destroy this item", @item, method: :delete, class:['button', 'is-danger'] %>
+</div>

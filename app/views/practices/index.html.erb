@@ -1,0 +1,29 @@
+<% if notice.present? %>
+<div class="notification is-primary"><%= notice %></div>
+<% end %>
+<h1 class="title is-1">Practices</h1>
+<div id="practices" class="box">
+    <table class="table is-bordered is-hoverable is-striped">
+        <tr>
+            <th>Item</th>
+            <th>Start</th>
+            <th>Stop</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% @practices.order(:practice_type, :name).each do |practice| %>
+            <tr>
+                <td><%= practice.item %></td>
+                <td><%= practice.start_time %></td>
+                <td><%= practice.end_time %></td>
+                <td><%= link_to "Show", practice %></td>
+				<td><%= link_to "Destroy", practice_path(practice), data: {
+									turbo_method: :delete,
+									turbo_confirm: "Are you sure?"
+								  } %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+<%= link_to "New practice", new_practice_path %>
