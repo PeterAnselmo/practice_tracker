@@ -17,14 +17,23 @@
   </div>
 
   <div>
+    <%= form.label :item_type, class: ['label'] %>
+    <%= form.select(:item_type, Item::VALID_TYPES.map{|t| [t.capitalize, t]}, {}, {class: ['select','is-medium']}) %>
+  </div>
+
+
+  <div>
     <%= form.label :description, class: ['label'] %>
     <%= form.text_area :description, class: ['textarea', 'is-medium'] %>
   </div>
 
   <div>
-    <%= form.label :active, class: ['label'] %>
-    <%= form.check_box :active, class: ['checkbox','is-mediumm'] %>
+    <label class="checkbox">
+        <%= form.check_box :active, class: ['checkbox'] %>
+        Active?
+    </label>
   </div>
+  <br />
 
   <div>
     <%= form.submit class: ['button','is-info'] %>

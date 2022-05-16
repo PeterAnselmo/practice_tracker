@@ -3,19 +3,26 @@
 <% end %>
 <h1 class="title is-1">Practices</h1>
 <div id="practices" class="box">
+    <div style="float:right">
+        <p>Total Today: <%= @day_total %>
+        <p>Total This Week: <%= @week_total %>
+
+    </div>
     <table class="table is-bordered is-hoverable is-striped">
         <tr>
             <th>Item</th>
             <th>Start</th>
             <th>Stop</th>
+            <th>Duration</th>
             <th></th>
             <th></th>
         </tr>
         <% @practices.order(:practice_type, :name).each do |practice| %>
             <tr>
                 <td><%= practice.item %></td>
-                <td><%= practice.start_time %></td>
-                <td><%= practice.end_time %></td>
+                <td><%= practice.start_time.strftime(DATETIME_COMMON) %></td>
+                <td><%= practice.end_time.strftime(DATETIME_COMMON) %></td>
+                <td><%= distance_of_time_in_words(practice.start_time, practice.end_time) %></td>
                 <td><%= link_to "Show", practice %></td>
 				<td><%= link_to "Destroy", practice_path(practice), data: {
 									turbo_method: :delete,

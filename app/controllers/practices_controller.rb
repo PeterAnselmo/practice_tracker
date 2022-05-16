@@ -2,12 +2,18 @@ class PracticesController < ApplicationController
   before_action :set_practice, only: %i[ show edit update destroy ]
 
     def landing
-        @item = Item.where(active:true).order('random()').limit(1).first
+        if params[:item_id]
+            @item = Item.find(params[:item_id])
+        else
+            @item = Item.where(active:true).order('random()').limit(1).first
+        end
     end
   
   # GET /practices or /practices.json
   def index
-    @practices = Practice.all
+      @practices = Practice.order('start_time desc').limit(200)
+      @day_total = Practice.where("start_time > '#{Time.now.beginning_of_day.utc}'").map{|p| p.end_time - p.start_time}.sum.to_i.to_descriptive_time
+      @week_total = Practice.where("start_time > '#{Time.now.beginning_of_week.utc}'").map{|p| p.end_time - p.start_time}.sum.to_i.to_descriptive_time
   end
 
   # GET /practices/1 or /practices/1.json

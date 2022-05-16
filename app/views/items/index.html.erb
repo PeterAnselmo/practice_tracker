@@ -1,6 +1,11 @@
 <div style="color: green"><%= notice %></>
 
 <h1 class="title is-1">Items</h1>
+<form class=form>
+    <input type="text" class="input" name="search" placeholder="Search..." value="<%= params[:search] %>" style="width: 300px">
+    <input type="submit" value = "Search" class="submit button">
+</form>
+
 
 <div id="items">
     <table class="table is-bordered is-hoverable is-striped">
@@ -14,7 +19,7 @@
         </tr>
         <% @items.order(:item_type, :name).each do |item| %>
             <tr>
-                <td><%= item.name %></td>
+                <td><%= link_to item.name, "/?item_id=#{item.id}" %></td>
                 <td><%= item.description %></td>
                 <td><%= item.item_type.try(:capitalize) %></td>
                 <td><%= item.active %></td>

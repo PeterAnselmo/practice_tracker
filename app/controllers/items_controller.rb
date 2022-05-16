@@ -2,9 +2,14 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
-  def index
-    @items = Item.all
-  end
+    def index
+        @items = Item.all
+        if params[:search].present?
+            @items = @items.where("name like '%#{params[:search]}%'")
+        end
+        @items = @items.order(:item_type, :name)
+
+    end
 
   # GET /items/1 or /items/1.json
   def show
@@ -65,6 +70,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :active)
+      params.require(:item).permit(:name, :description, :item_type, :active)
     end
 end

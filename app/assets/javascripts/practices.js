@@ -5,7 +5,11 @@ $(document).ready(function(){
         duration = $("p.elapsed-time-text").html();
         $.post('practices',{practice:{item_id: item_id}, duration:duration})
             .done(function(data){
-                alert("Practice Saved");
+                $(this).prop('disabled', true);
+				$('#practice-save-success').show();
+            })
+            .fail(function(data){
+                alert("There was an error saving!");
             });
     });
 
