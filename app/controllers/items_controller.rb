@@ -5,7 +5,10 @@ class ItemsController < ApplicationController
     def index
         @items = Item.all
         if params[:search].present?
-            @items = @items.where("name like '%#{params[:search]}%'")
+            @items = @items.where("name like ?", "%#{params[:search]}%")
+        end
+        if params[:item_type].present?
+            @items = @items.where("item_type = ?", params[:item_type])
         end
         @items = @items.order(:item_type, :name)
 

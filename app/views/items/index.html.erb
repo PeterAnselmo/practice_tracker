@@ -2,6 +2,7 @@
 
 <h1 class="title is-1">Items</h1>
 <form class=form>
+	<%= select_tag(:item_type, options_for_select(Item::VALID_TYPES, params[:item_type]), {class: 'select'}) %>
     <input type="text" class="input" name="search" placeholder="Search..." value="<%= params[:search] %>" style="width: 300px">
     <input type="submit" value = "Search" class="submit button">
 </form>

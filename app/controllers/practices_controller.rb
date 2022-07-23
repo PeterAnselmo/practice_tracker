@@ -11,9 +11,10 @@ class PracticesController < ApplicationController
   
   # GET /practices or /practices.json
   def index
-      @practices = Practice.order('start_time desc').limit(200)
+      @practices = Practice.order('start_time desc').limit(200).preload(:item)
       @day_total = Practice.where("start_time > '#{Time.now.beginning_of_day.utc}'").map{|p| p.end_time - p.start_time}.sum.to_i.to_descriptive_time
       @week_total = Practice.where("start_time > '#{Time.now.beginning_of_week.utc}'").map{|p| p.end_time - p.start_time}.sum.to_i.to_descriptive_time
+      @last_week_total = Practice.where("start_time > '#{(Time.now.beginning_of_week.utc - 1.week)}' AND start_time < '#{Time.now.beginning_of_week.utc}'").map{|p| p.end_time - p.start_time}.sum.to_i.to_descriptive_time
   end
 
   # GET /practices/1 or /practices/1.json
