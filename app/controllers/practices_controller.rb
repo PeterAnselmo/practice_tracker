@@ -84,6 +84,16 @@ class PracticesController < ApplicationController
     end
   end
 
+    def report
+        @practices = Practice.find_by_sql("select items.name, sum((julianday(practices.end_time) - julianday(practices.start_time))*86400) as duration
+                                         from practices
+                                         inner join items on practices.item_id = items.id
+                                         where practices.created_at > '#{4.weeks.ago.utc}'
+                                         group by items.name
+                                         order by sum((julianday(practices.end_time) - julianday(practices.start_time))*86400) desc")
+
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_practice
