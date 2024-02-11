@@ -2,7 +2,9 @@
 
 <h1 class="title is-1">Items</h1>
 <form class=form>
-	<%= select_tag(:item_type, options_for_select(Item::VALID_TYPES, params[:item_type]), {class: 'select'}) %>
+	<%= select_tag(:item_type, options_for_select(Item::VALID_TYPES, params[:item_type]), {include_blank: 'Type', class: 'select'}) %>
+	<%= select_tag(:active, options_for_select([:true, :false], params[:active]), {include_blank: 'Active...', class: 'select'}) %>
+	<%= select_tag(:instrument_id, options_for_select(Instrument.order(:name).collect{|i| [i.name, i.id]}, params[:instrument_id]), {include_blank: 'Instrument...', class: 'select'}) %>
     <input type="text" class="input" name="search" placeholder="Search..." value="<%= params[:search] %>" style="width: 300px">
     <input type="submit" value = "Search" class="submit button">
 </form>

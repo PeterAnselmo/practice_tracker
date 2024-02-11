@@ -93,6 +93,14 @@ class PracticesController < ApplicationController
                                          group by items.name
                                          order by sum((julianday(practices.end_time) - julianday(practices.start_time))*86400) desc")
 
+        @instruments = Practice.find_by_sql("select instruments.name, sum((julianday(practices.end_time) - julianday(practices.start_time))*86400) as duration
+                                         from practices
+                                         inner join items on practices.item_id = items.id
+                                         inner join instruments on items.instrument_id = instruments.id
+                                         where practices.created_at > '#{4.weeks.ago.utc}'
+                                         group by instruments.name
+                                         order by sum((julianday(practices.end_time) - julianday(practices.start_time))*86400) desc")
+
     end
 
   private

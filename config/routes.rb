@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :instruments
   get "practices/landing/", to: "practices#landing"
 
   get "practices/report", to: "practices#report"

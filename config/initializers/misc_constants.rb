@@ -15,3 +15,13 @@ class Integer
         interval
     end
 end
+
+class String
+    def to_bool
+        if ['1','true','t','y'].include?(self.downcase)
+            return true
+        else
+            return false
+        end
+    end
+end

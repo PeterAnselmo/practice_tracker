@@ -1,0 +1,41 @@
+
+<h1 class="title is-1">Practice Report</h1>
+
+<p class="p">Last 4 Weeks</p>
+
+
+<table class="table is-bordered is-hoverable is-striped">
+    <tr>
+        <th>Item</th>
+        <th>Duration</th>
+        <th></th>
+    </tr>
+    <% max = nil %>
+    <% @practices.each do |practice| %>
+        <% value = (practice[:duration].to_i / 200) %>
+        <% max = value unless max %>
+        <tr>
+            <td><%= practice[:name] %></td>
+            <td><%= practice[:duration].to_i.to_descriptive_time %></td>
+            <td><progress class="progress is-primary" style="width:500px" value="<%= value %>" max="<%= max %>"></progress></td>
+        </tr>
+    <% end %>
+</table>
+
+<table class="table is-bordered is-hoverable is-striped">
+    <tr>
+        <th>Item</th>
+        <th>Duration</th>
+        <th></th>
+    </tr>
+    <% max = nil %>
+    <% @instruments.each do |practice| %>
+        <% value = (practice[:duration].to_i / 200) %>
+        <% max = value unless max %>
+        <tr>
+            <td><%= practice[:name] %></td>
+            <td><%= practice[:duration].to_i.to_descriptive_time %></td>
+            <td><progress class="progress is-primary" style="width:500px" value="<%= value %>" max="<%= max %>"></progress></td>
+        </tr>
+    <% end %>
+</table>

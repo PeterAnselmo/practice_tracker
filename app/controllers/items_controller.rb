@@ -10,6 +10,12 @@ class ItemsController < ApplicationController
         if params[:item_type].present?
             @items = @items.where("item_type = ?", params[:item_type])
         end
+        if params[:active].present?
+			@items = @items.where("active = ?", params[:active].to_bool)
+        end
+        if params[:instrument_id].present?
+			@items = @items.where("instrument_id = ?", params[:instrument_id])
+        end
         @items = @items.order(:item_type, :name)
 
     end
@@ -73,6 +79,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :item_type, :active)
+      params.require(:item).permit(:name, :description, :item_type, :instrument_id, :active)
     end
 end

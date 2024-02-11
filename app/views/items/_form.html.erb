@@ -21,6 +21,10 @@
     <%= form.select(:item_type, Item::VALID_TYPES.map{|t| [t.capitalize, t]}, {}, {class: ['select','is-medium']}) %>
   </div>
 
+  <div>
+    <%= form.label :instrument, class: ['label'] %>
+	<%= form.collection_select(:instrument_id, Instrument.order(:name), :id, :name, {}, {class:['select', 'is-medium']}) %>
+  </div>
 
   <div>
     <%= form.label :description, class: ['label'] %>
