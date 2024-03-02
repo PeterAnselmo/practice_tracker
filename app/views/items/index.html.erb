@@ -15,6 +15,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Instrument</th>
             <th>Type</th>
             <th>Active?</th>
             <th></th>
@@ -24,6 +25,7 @@
             <tr>
                 <td><%= link_to item.name, "/?item_id=#{item.id}" %></td>
                 <td><%= item.description %></td>
+                <td><%= item.instrument %></td>
                 <td><%= item.item_type.try(:capitalize) %></td>
                 <td><%= item.active %></td>
                 <td><%= link_to "Show", item %></td>

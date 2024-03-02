@@ -12,6 +12,7 @@
     <table class="table is-bordered is-hoverable is-striped">
         <tr>
             <th>Item</th>
+            <th>Instrument</th>
             <th>Start</th>
             <th>Stop</th>
             <th>Duration</th>
@@ -21,6 +22,7 @@
         <% @practices.order(:practice_type, :name).each do |practice| %>
             <tr>
                 <td><%= practice.item %></td>
+                <td><%= practice.item.instrument %></td>
                 <td><%= practice.start_time.strftime(DATETIME_COMMON) %></td>
                 <td><%= practice.end_time.strftime(DATETIME_COMMON) %></td>
                 <td><%= (practice.end_time - practice.start_time).to_i.to_descriptive_time %></td>
